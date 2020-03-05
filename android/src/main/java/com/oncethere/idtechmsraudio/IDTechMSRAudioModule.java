@@ -94,11 +94,11 @@ public class IDTechMSRAudioModule extends ReactContextBaseJavaModule implements 
         _uniMagReader.startAutoConfig(true);
 
         // ID Tech's device profile table is too limited for production use.
-        // _uniMagReader.setXMLFileNameWithPath("/sdcard/IDT_uniMagCfg.xml");
-        // if (_uniMagReader.loadingConfigurationXMLFile(true)) {
-        //   message = "Found existing config file.";
-        //   _uniMagReader.connect();
-        // }
+        _uniMagReader.setXMLFileNameWithPath("umcfg.xml");
+        if (_uniMagReader.loadingConfigurationXMLFile(true)) {
+          message = "Found existing config file.";
+          _uniMagReader.connect();
+        }
       }
     }
     else {
