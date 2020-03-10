@@ -84,22 +84,24 @@ public class IDTechMSRAudioModule extends ReactContextBaseJavaModule implements 
 
       StructConfigParameters acProfile = autoConfigProfile.loadAutoConfigProfile(_reactContext);
 
-      //if (acProfile != null) {
-        //sendEvent("IdTechUniMagEvent", autoConfigProfile.toWritableMap(acProfile));
-        //_uniMagReader.connectWithProfile(acProfile);
-        //message = "Found existing auto config profile.";
-      //}
-      //else {
-        //message = "Starting auto config.";
-        //_uniMagReader.startAutoConfig(true);
+      if (acProfile != null) {
+        sendEvent("IdTechUniMagEvent", autoConfigProfile.toWritableMap(acProfile));
+        _uniMagReader.connectWithProfile(acProfile);
+        message = "Found existing auto config profile.";
+      }
+      else {
+         message = "Starting auto config.";
+        _uniMagReader.startAutoConfig(true);
 
         // ID Tech's device profile table is too limited for production use.
-        _uniMagReader.setXMLFileNameWithPath("./umcfg.xml");
-        if (_uniMagReader.loadingConfigurationXMLFile(true)) {
-          message = "Found existing config file.";
-          _uniMagReader.connect();
-        }
-      //}
+        // _uniMagReader.setXMLFileNameWithPath("/sdcard/IDT_uniMagCfg.xml");
+        // if (_uniMagReader.loadingConfigurationXMLFile(true)) {
+        //   message = "Found existing config file.";
+        //   _uniMagReader.connect();
+        // }
+
+        _uniMagReader.connect();
+      }
     }
     else {
       statusCode = UmRet.UMRET_NO_READER.getValue();
